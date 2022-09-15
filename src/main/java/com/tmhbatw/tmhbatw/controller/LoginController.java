@@ -2,6 +2,7 @@ package com.tmhbatw.tmhbatw.controller;
 
 
 import com.tmhbatw.tmhbatw.util.Check;
+import com.tmhbatw.tmhbatw.util.Encryption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +50,8 @@ public class LoginController {
 
         if (!Check.CheckUsername(name)||!Check.CheckPassword(passwd))
             return false;
+
+        String savePasswd = Encryption.getSHA256Str(passwd);
 
         //数据库保存
         return true;
