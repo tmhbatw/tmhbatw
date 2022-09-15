@@ -1,11 +1,10 @@
 package com.tmhbatw.tmhbatw.controller;
 
 
+import com.tmhbatw.tmhbatw.util.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -40,5 +39,18 @@ public class LoginController {
         }
         System.out.println(list.size());
         return result;
+    }
+
+    @PostMapping("register")
+    public Boolean register(@RequestBody Map<String, Object> map){
+        System.out.println(map);
+        String name = (String) map.getOrDefault("name","");
+        String passwd = (String) map.getOrDefault("passwd","");
+
+        if (!Check.CheckUsername(name)||!Check.CheckPassword(passwd))
+            return false;
+
+        //数据库保存
+        return true;
     }
 }
