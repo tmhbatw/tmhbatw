@@ -20,11 +20,9 @@ public class TestUserInfo {
     @Test
     public void TestUpdate() {
         UserInfo user=new UserInfo();
-        UserInfoExample ue=new UserInfoExample(user);
         user.setName("tmhbatw");
         user.setPasswd(Encryption.getSHA256Str("liuruihongshuai"));
 
-        user.
-        System.out.println(result);
+        userInfoMapper.insert(user);
     }
 }

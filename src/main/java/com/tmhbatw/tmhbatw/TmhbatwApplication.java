@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("src/main/java/com.tmhbatw.tmhbatw.dao")
+@MapperScan
 public class TmhbatwApplication {
 
 	public static void main(String[] args) {

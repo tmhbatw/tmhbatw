@@ -1,8 +1,11 @@
 package com.tmhbatw.tmhbatw.controller;
 
 
+import com.tmhbatw.tmhbatw.service.UserInfoService;
 import com.tmhbatw.tmhbatw.util.Check;
 import com.tmhbatw.tmhbatw.util.Encryption;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +17,18 @@ public class LoginController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private UserInfoService userInfoService;
+
+    protected static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
+
     @GetMapping("/login")
     public Map<String,Boolean> login(@RequestParam Map<String,String> map) {
         String name =  map.getOrDefault("name","");
         String password = map.getOrDefault("password", "");
 
-        System.out.println(map);
+        logger.info(map.toString());
 
         Map<String,Boolean> result=new HashMap<>();
         if(name.equals("tmhbatw")&&password.equals("shuai")){
@@ -35,16 +44,16 @@ public class LoginController {
             for (Map.Entry<String, Object> entry : entries) {
                 Object key = entry.getKey();
                 Object value = entry.getValue();
-                System.out.println(key + ":" + value);
+                logger.info(key + ":" + value);
             }
         }
-        System.out.println(list.size());
+        logger.info(String.valueOf(list.size()));
         return result;
     }
 
     @PostMapping("register")
     public Boolean register(@RequestBody Map<String, Object> map){
-        System.out.println(map);
+        logger.info(map.toString());
         String name = (String) map.getOrDefault("name","");
         String passwd = (String) map.getOrDefault("passwd","");
 
@@ -54,6 +63,6 @@ public class LoginController {
         String savePasswd = Encryption.getSHA256Str(passwd);
 
         //数据库保存
-        return true;
+        return userInfoService.insertUserInfo(name,savePasswd);
     }
 }

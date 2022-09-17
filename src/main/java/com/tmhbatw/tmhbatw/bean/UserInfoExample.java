@@ -34,7 +34,7 @@ public class UserInfoExample {
      *
      * @mbg.generated Sat Sep 17 02:50:06 CST 2022
      */
-    public UserInfoExample() {
+    public UserInfoExample(UserInfo user) {
         oredCriteria = new ArrayList<>();
     }
 
