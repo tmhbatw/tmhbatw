@@ -13,7 +13,7 @@ import java.util.List;
 
 //用于生成mybatis映射的代码
 @SpringBootTest
-public class TestGenerateMybatis {
+public class GenerateMybatis {
 
     @Test
     public void generate() throws Exception{

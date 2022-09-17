@@ -18,10 +18,6 @@ public class UserInfoService {
     @Autowired(required = false)
     private UserInfoMapper userInfoMapper;
 
-    public List<UserInfo> getUserInfoList(){
-        return null;
-    }
-
     public boolean insertUserInfo(String name,String passwd) {
         UserInfoExample select =new UserInfoExample();
         UserInfoExample.Criteria search =select.createCriteria();
@@ -29,7 +25,7 @@ public class UserInfoService {
         List<UserInfo> result = userInfoMapper.selectByExample(select);
 
         if (result.size() == 1){
-            logger.info("insert userInfo err!, repeat name is "+name);
+            logger.warn("insert userInfo err!, repeat name is "+name);
             return false;
         }
 
@@ -37,5 +33,16 @@ public class UserInfoService {
         save.setName(name);
         save.setPasswd(Encryption.getSHA256Str(passwd));
         return userInfoMapper.insertSelective(save)==1;
+    }
+
+    public boolean login(String name, String passwd){
+        UserInfo user = userInfoMapper.selectUserInfoByName(name);
+        if (user==null||!user.getPasswd().equals(Encryption.getSHA256Str(passwd))){
+            return false;
+        }
+
+        //set cookie
+
+        return true;
     }
 }

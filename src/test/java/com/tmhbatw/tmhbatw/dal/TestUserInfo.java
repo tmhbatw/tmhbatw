@@ -26,6 +26,25 @@ public class TestUserInfo {
             getLogger(TestUserInfo.class);
 
     @Test
+    public void testInsertUserInfo() {
+        UserInfo userInfo =new UserInfo();
+        userInfo.setName("tmhbatw");
+        userInfo.setPasswd("liuruihong199856");
+        int result=userInfoMapper.insert(userInfo);
+        Assert.assertEquals(result,1);
+    }
+
+    @Test
+    public void testUpdateUserInfo() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(1);
+        userInfo.setName("tmhbatw");
+        userInfo.setPasswd(Encryption.getSHA256Str("liuruihong199856"));
+        int result = userInfoMapper.updateByPrimaryKey(userInfo);
+        Assert.assertEquals(result,1);
+    }
+
+    @Test
     public void testSelectByPrimaryKey() {
         int primaryKey = 1;
         UserInfo user = userInfoMapper.selectByPrimaryKey(primaryKey);
