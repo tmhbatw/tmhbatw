@@ -98,4 +98,6 @@ public interface UserInfoMapper {
      * @mbg.generated Sat Sep 17 16:02:53 CST 2022
      */
     int updateByPrimaryKey(UserInfo row);
+
+    UserInfo selectUserInfoByName(String name);
 }

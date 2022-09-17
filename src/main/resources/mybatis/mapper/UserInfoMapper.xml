@@ -203,6 +203,9 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <select id="selectUserInfoByName" parameterType="java.lang.String" resultType="com.tmhbatw.tmhbatw.bean.UserInfo">
+    select * from userInfo where name = #{name,jdbcType=VARCHAR}
+  </select>
   <update id="updateByExampleSelective" parameterType="map">
     <!--
       WARNING - @mbg.generated
