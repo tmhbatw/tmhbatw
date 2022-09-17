@@ -21,8 +21,8 @@ public class UserInfoService {
     }
 
     public boolean insertUserInfo(String name,String passwd) {
-        UserInfo userInfo =new UserInfo(name,passwd);
-        int result =  userInfoMapper.insert(userInfo);
+       // UserInfo userInfo =new UserInfo(name,passwd);
+        int result =  userInfoMapper.insert(null);
 
         if (result == 0){
             logger.error("insert userInfo err!, name is "+name);
