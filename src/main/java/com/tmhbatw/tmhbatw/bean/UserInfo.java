@@ -1,5 +1,13 @@
 package com.tmhbatw.tmhbatw.bean;
 
+//CREATE TABLE `userInfo` (
+//        `id` int NOT NULL AUTO_INCREMENT,
+//        `name` varchar(16) NOT NULL,
+//        `passwd` varchar(64) NOT NULL,
+//        `phone` int DEFAULT NULL,
+//        `email` varchar(32) DEFAULT NULL,
+//        PRIMARY KEY (`id`)
+//        )
 public class UserInfo {
     /**
      *
