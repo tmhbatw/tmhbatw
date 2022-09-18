@@ -3,12 +3,12 @@ package com.tmhbatw.tmhbatw.controller;
 
 import com.tmhbatw.tmhbatw.service.UserInfoService;
 import com.tmhbatw.tmhbatw.util.Check;
-import com.tmhbatw.tmhbatw.util.Encryption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class LoginController {
 
 
     @GetMapping("/login")
-    public Map<String,Boolean> login(@RequestParam Map<String,String> map) {
+    public ResponseEntity<Map<String,Boolean>> login(@RequestParam Map<String,String> map) {
         String name =  map.getOrDefault("name","");
         String password = map.getOrDefault("password", "");
 
@@ -31,7 +31,7 @@ public class LoginController {
 
         Map<String,Boolean> result=new HashMap<>();
         result.put("result", userInfoService.login(name,password));
-        return result;
+        return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @PostMapping("register")
